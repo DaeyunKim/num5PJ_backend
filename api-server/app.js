@@ -11,7 +11,7 @@ var cors = require('cors');
 
 // Connection URL
 // const url = 'mongodb://222.106.100.125:5050';
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://localhost:27017/num5PJ';
 
 // post방식의 데이터를 이용할려면 필요 ( npm install body-parser )
 // bodyParser의 json과 urlencoded 부분의 사용명시
@@ -25,7 +25,6 @@ app.use(session({
 	saveUninitialized: true
 }))
 
-// login기능시 passport사용  ( 여기는 미포함 )
  
 // Use connect method to connect to the server
 db.connect(url, function(err) {
@@ -44,4 +43,11 @@ db.connect(url, function(err) {
 app.use(router)
 
 
+app.use(function(req, res, next) {
+  res.status(404).send('Sorry cant find that!');
+});
 
+// Handle 500
+app.use(function(error, req, res, next) {
+   res.send('500: Internal Server Error', 500);
+});
