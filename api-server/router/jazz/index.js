@@ -8,9 +8,9 @@ var location = require('./location/index')
 
 router.post('/', function(req,res) {
 	console.log('called api: /jazz function: post(insert)')
-	var collection = db.get().collection('jazz');
+	let collection = db.get().collection('jazz');
 
-	var jazzData = req.body;
+	let jazzData = req.body;
 	collection.insertOne(jazzData, function(err,r) {
 		console.log(r.insertedCount);
 		if( r.insertedCount > 0 ) {
@@ -26,8 +26,8 @@ router.post('/', function(req,res) {
 router.get('/', function(req,res) {
     console.log('called api: /jazz function: get(select)')
 	
-	var collection = db.get().collection('jazz');
-	var name = req.params.name;	
+	let collection = db.get().collection('jazz');
+	let name = req.params.name;	
 	
 	collection.find({}).toArray(function(err, docs) {
 
