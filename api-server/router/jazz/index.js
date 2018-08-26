@@ -9,7 +9,7 @@ var location = require('./location/index')
 
 router.post('/', function(req,res) {
 	console.log('called api: /jazz function: post(insert)')
-	var collection = db.get().collection('jazz');
+	const collection = db.get().collection('jazz');
 
 	let jazzData = req.body;
 	collection.insertOne(jazzData, function(err,r) {
@@ -26,13 +26,13 @@ router.post('/', function(req,res) {
 router.get('/', function(req,res) {
     console.log('called api: /jazz function: get(select)')
 	
-	let collection = db.get().collection('jazz');
+	const collection = db.get().collection('jazz');
 	let day = sanitize(req.query.day);
 	let weekAgo = '\'\'';
 
 	if(day != null) {
 		day = day * -1;
-		weekAgo = returnYYYYMMDD(day);
+		weekAgo = getDateAFewDayAgo(day);
 	}
 
 	collection.find({date : {$gte: weekAgo }}, {_id : 0}).toArray(function(err, docs) {
@@ -41,7 +41,7 @@ router.get('/', function(req,res) {
 	
 });
 
-function returnYYYYMMDD(numFromToday = 0){
+function getDateAFewDayAgo(numFromToday = 0){
   let d = new Date();
   d.setDate(d.getDate() + numFromToday);
   const month = d.getMonth() < 9 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1;
