@@ -11,7 +11,7 @@ var cors = require('cors');
 
 // Connection URL
 // const url = 'mongodb://222.106.100.125:5050';
-var url = 'mongodb://localhost:27017/num5PJ';
+const url = 'mongodb://localhost:27017/num5PJ';
 
 // post방식의 데이터를 이용할려면 필요 ( npm install body-parser )
 // bodyParser의 json과 urlencoded 부분의 사용명시
